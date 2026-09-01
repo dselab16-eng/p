@@ -1,96 +1,7779 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+      content="University of Frontier Technology, Bangladesh — A specialized public university for technology, research and innovation.">
+
+<meta name="theme-color"
+      content="#063b2a">
+
+<title>
+    University of Frontier Technology, Bangladesh
+</title>
+
+
+<!-- =========================================================
+     FONTS
+========================================================= -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:wght@600;700&display=swap"
+      rel="stylesheet">
+
+
+<!-- =========================================================
+     ICONS
+========================================================= -->
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+    --green: #063b2a;
+    --green-2: #075238;
+    --green-3: #0a7650;
+    --green-dark: #031f16;
+
+    --blue: #1d2f83;
+    --blue-light: #eef1ff;
+
+    --gold: #c99a35;
+    --gold-light: #e8c86b;
+
+    --white: #ffffff;
+
+    --bg: #f5f7f6;
+    --bg-2: #eef3f0;
+
+    --text: #17221e;
+    --muted: #6c7772;
+
+    --border: #dfe7e2;
+
+    --danger: #b92323;
+
+    --shadow:
+        0 15px 50px rgba(0,0,0,.08);
+
+    --shadow-small:
+        0 5px 20px rgba(0,0,0,.06);
+
+    --radius: 12px;
+
+    --transition: .3s ease;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark {
+
+    --bg: #091510;
+    --bg-2: #0d1d16;
+
+    --white: #10231b;
+
+    --text: #eef7f2;
+    --muted: #aebdb5;
+
+    --border: #20352c;
+
+    --shadow:
+        0 15px 50px rgba(0,0,0,.35);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    font-family: "Inter", sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    line-height: 1.6;
+
+    overflow-x: hidden;
+
+    transition:
+        background .3s,
+        color .3s;
+
+}
+
+
+body.no-scroll {
+
+    overflow: hidden;
+
+}
+
+
+img {
+
+    width: 100%;
+
+    display: block;
+
+}
+
+
+button,
+input {
+
+    font-family: inherit;
+
+}
+
+
+button {
+
+    cursor: pointer;
+
+}
+
+
+a {
+
+    text-decoration: none;
+
+    color: inherit;
+
+}
+
+
+.container {
+
+    width: min(1200px, 92%);
+
+    margin: auto;
+
+}
+
+
+.serif {
+
+    font-family: "Noto Serif", serif;
+
+}
+
+
+
+/* =========================================================
+   INTERACTIVE UI — SCROLL PROGRESS / CLOCK / RIPPLE / TILT
+========================================================= */
+
+const scrollProgress = document.getElementById("scrollProgress");
+const cursorGlow = document.getElementById("cursorGlow");
+const heroClock = document.getElementById("heroClock");
+
+function updateScrollProgress(){
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    if(scrollProgress) scrollProgress.style.width = pct + "%";
+
+    const topBtn = document.getElementById("topBtn");
+    if(topBtn){
+        topBtn.classList.toggle("visible", window.scrollY > 500);
+    }
+}
+window.addEventListener("scroll", updateScrollProgress, {passive:true});
+updateScrollProgress();
+
+document.addEventListener("mousemove", (e)=>{
+    if(!cursorGlow) return;
+    cursorGlow.style.left = e.clientX + "px";
+    cursorGlow.style.top = e.clientY + "px";
+});
+
+function updateHeroClock(){
+    if(!heroClock) return;
+    heroClock.textContent = new Intl.DateTimeFormat("en-GB", {
+        timeZone:"Asia/Dhaka",
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit",
+        hour12:false
+    }).format(new Date());
+}
+updateHeroClock();
+setInterval(updateHeroClock,1000);
+
+/* Button ripple */
+document.querySelectorAll(".btn,.icon-btn,.admission-btn,.faculty-tab,.research-tab,.float-btn").forEach(btn=>{
+    btn.addEventListener("click",(e)=>{
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement("span");
+        ripple.className = "ripple";
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + "px";
+        ripple.style.left = (e.clientX - rect.left - size/2) + "px";
+        ripple.style.top = (e.clientY - rect.top - size/2) + "px";
+        btn.appendChild(ripple);
+        setTimeout(()=>ripple.remove(),600);
+    });
+});
+
+/* Subtle 3D tilt on desktop */
+if(window.matchMedia("(pointer:fine)").matches){
+    document.querySelectorAll(".department-item,.research-card,.news-card,.digital-card,.club,.contact-card").forEach(card=>{
+        card.classList.add("tilt-card");
+        card.addEventListener("mousemove",(e)=>{
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX-r.left)/r.width-.5;
+            const y = (e.clientY-r.top)/r.height-.5;
+            card.style.transform = `perspective(800px) rotateX(${(-y*3).toFixed(2)}deg) rotateY(${(x*3).toFixed(2)}deg) translateY(-4px)`;
+        });
+        card.addEventListener("mouseleave",()=>{
+            card.style.transform="";
+        });
+    });
+}
+
+/* Keyboard shortcuts: / = search, h = home */
+document.addEventListener("keydown",(e)=>{
+    const tag = document.activeElement?.tagName?.toLowerCase();
+    if(tag==="input" || tag==="textarea") return;
+    if(e.key==="/"){
+        e.preventDefault();
+        document.getElementById("searchBtn")?.click();
+    }
+    if(e.key.toLowerCase()==="h"){
+        window.location.hash="#home";
+    }
+});
+
+
+/* =========================================================
+   PRELOADER
+========================================================= */
+
+.preloader {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    background: var(--green-dark);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        opacity .5s,
+        visibility .5s;
+
+}
+
+
+.preloader.hide {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+}
+
+
+.loader {
+
+    text-align: center;
+
+    color: white;
+
+}
+
+
+.loader img {
+
+    width: 90px;
+
+    height: 90px;
+
+    object-fit: contain;
+
+    margin: auto;
+
+    animation:
+        loaderPulse 1.4s infinite;
+
+}
+
+
+.loader p {
+
+    margin-top: 18px;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+}
+
+
+@keyframes loaderPulse {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+        opacity: .7;
+
+    }
+
+    50% {
+
+        transform: scale(1.08);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+
+    background: var(--green-dark);
+
+    color: rgba(255,255,255,.8);
+
+    font-size: 11px;
+
+}
+
+
+.topbar-inner {
+
+    min-height: 38px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.topbar-left,
+.topbar-right {
+
+    display: flex;
+
+    gap: 18px;
+
+    align-items: center;
+
+}
+
+
+.topbar a:hover {
+
+    color: var(--gold-light);
+
+}
+
+
+.topbar i {
+
+    color: var(--gold-light);
+
+    margin-right: 5px;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    background: var(--white);
+
+    border-bottom: 1px solid var(--border);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 900;
+
+    transition: .3s;
+
+}
+
+
+.header.scrolled {
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.08);
+
+}
+
+
+.navbar {
+
+    min-height: 92px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    flex-shrink: 0;
+
+}
+
+
+.brand img {
+
+    width: 68px;
+
+    height: 68px;
+
+    object-fit: contain;
+
+}
+
+
+.brand-text {
+
+    line-height: 1.2;
+
+}
+
+
+.brand-title {
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: var(--green);
+
+    max-width: 310px;
+
+}
+
+
+.brand-subtitle {
+
+    font-size: 8px;
+
+    color: var(--gold);
+
+    font-weight: 800;
+
+    letter-spacing: 1.7px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.nav-link {
+
+    position: relative;
+
+    padding: 35px 0;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: var(--text);
+
+}
+
+
+.nav-link::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 0;
+
+    width: 0;
+
+    height: 2px;
+
+    background: var(--gold);
+
+    transition: .25s;
+
+}
+
+
+.nav-link:hover::after,
+.nav-link.active::after {
+
+    width: 100%;
+
+}
+
+
+.nav-link:hover {
+
+    color: var(--green-3);
+
+}
+
+
+/* dropdown */
+
+.nav-dropdown {
+
+    position: relative;
+
+}
+
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top: 82px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        translateY(10px);
+
+    width: 290px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow: var(--shadow);
+
+    padding: 12px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .25s;
+
+}
+
+
+.nav-dropdown:hover .dropdown-menu {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
+}
+
+
+.dropdown-menu a {
+
+    display: block;
+
+    padding: 12px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+}
+
+
+.dropdown-menu a:hover {
+
+    background: var(--bg-2);
+
+    color: var(--green);
+
+}
+
+
+/* nav buttons */
+
+.nav-tools {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+
+.icon-btn {
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 50%;
+
+    border: 1px solid var(--border);
+
+    background: transparent;
+
+    color: var(--text);
+
+    transition: .25s;
+
+}
+
+
+.icon-btn:hover {
+
+    background: var(--green);
+
+    color: white;
+
+}
+
+
+.admission-btn {
+
+    background: var(--green);
+
+    color: white;
+
+    padding: 11px 16px;
+
+    border-radius: 5px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+.admission-btn:hover {
+
+    background: var(--green-3);
+
+}
+
+
+/* mobile */
+
+.mobile-toggle {
+
+    display: none;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--green);
+
+    font-size: 25px;
+
+}
+
+
+/* =========================================================
+   NOTICE TICKER
+========================================================= */
+
+.notice {
+
+    background: var(--gold);
+
+    color: #15200f;
+
+}
+
+
+.notice-inner {
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+}
+
+
+.notice-label {
+
+    background: var(--green);
+
+    color: white;
+
+    padding: 7px 15px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+}
+
+
+.notice-track {
+
+    overflow: hidden;
+
+    flex: 1;
+
+}
+
+
+.notice-content {
+
+    white-space: nowrap;
+
+    display: inline-block;
+
+    padding-left: 100%;
+
+    animation:
+        ticker 28s linear infinite;
+
+    font-size: 11px;
+
+}
+
+
+@keyframes ticker {
+
+    to {
+
+        transform: translateX(-100%);
+
+    }
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 650px;
+
+    position: relative;
+
+    color: white;
+
+    overflow: hidden;
+
+}
+
+
+.hero-slide {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    transition:
+        opacity 1s ease;
+
+}
+
+
+.hero-slide.active {
+
+    opacity: 1;
+
+}
+
+
+.hero-slide::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(2,30,20,.96),
+            rgba(3,55,38,.82),
+            rgba(3,55,38,.35)
+        );
+
+}
+
+
+.hero-slide:nth-child(1) {
+
+    background:
+        url("https://uftb.ac.bd/uploads/topics/17611140117998.jpg")
+        center/cover;
+
+}
+
+
+.hero-slide:nth-child(2) {
+
+    background:
+        url("https://dse.uftb.ac.bd/assets/uploads/slider/home-slider-1760973781-sms.jpg")
+        center/cover;
+
+}
+
+
+.hero-slide:nth-child(3) {
+
+    background:
+        linear-gradient(
+            rgba(3,45,30,.45),
+            rgba(3,45,30,.65)
+        ),
+        url("https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=2000&q=85")
+        center/cover;
+
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 3;
+
+    min-height: 650px;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.hero-copy {
+
+    max-width: 770px;
+
+}
+
+
+.hero-kicker {
+
+    color: var(--gold-light);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.hero h1 {
+
+    font-family: "Noto Serif", serif;
+
+    font-size: clamp(42px,6vw,74px);
+
+    line-height: 1.06;
+
+    margin-bottom: 22px;
+
+}
+
+
+.hero h1 span {
+
+    color: var(--gold-light);
+
+}
+
+
+.hero-description {
+
+    max-width: 650px;
+
+    color: rgba(255,255,255,.82);
+
+    font-size: 15px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 13px 20px;
+
+    border-radius: 5px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    border: 1px solid transparent;
+
+    transition: .3s;
+
+}
+
+
+.btn-gold {
+
+    background: var(--gold);
+
+    color: white;
+
+}
+
+
+.btn-gold:hover {
+
+    background: #ad8126;
+
+    transform: translateY(-2px);
+
+}
+
+
+.btn-outline {
+
+    color: white;
+
+    border-color: rgba(255,255,255,.6);
+
+}
+
+
+.btn-outline:hover {
+
+    background: white;
+
+    color: var(--green);
+
+}
+
+
+.hero-dots {
+
+    position: absolute;
+
+    bottom: 35px;
+
+    left: 4%;
+
+    z-index: 5;
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+
+.hero-dot {
+
+    width: 30px;
+
+    height: 4px;
+
+    border: none;
+
+    background: rgba(255,255,255,.35);
+
+}
+
+
+.hero-dot.active {
+
+    background: var(--gold);
+
+}
+
+
+/* =========================================================
+   QUICK ACCESS
+========================================================= */
+
+.quick-access {
+
+    position: relative;
+
+    z-index: 20;
+
+    margin-top: -1px;
+
+    background: var(--white);
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.quick-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6,1fr);
+
+}
+
+
+.quick-card {
+
+    padding: 22px 15px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+
+    transition: .3s;
+
+}
+
+
+.quick-card:last-child {
+
+    border: none;
+
+}
+
+
+.quick-card:hover {
+
+    background: var(--bg-2);
+
+    transform: translateY(-4px);
+
+}
+
+
+.quick-card i {
+
+    color: var(--green);
+
+    font-size: 20px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.quick-card h3 {
+
+    font-size: 11px;
+
+    margin-bottom: 3px;
+
+}
+
+
+.quick-card p {
+
+    font-size: 9px;
+
+    color: var(--muted);
+
+}
+
+
+/* =========================================================
+   GENERAL SECTION
+========================================================= */
+
+.section {
+
+    padding: 95px 0;
+
+}
+
+
+.section-head {
+
+    max-width: 760px;
+
+    margin: 0 auto 50px;
+
+    text-align: center;
+
+}
+
+
+.eyebrow {
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.section-head h2 {
+
+    font-family: "Noto Serif", serif;
+
+    color: var(--green);
+
+    font-size: clamp(30px,4vw,43px);
+
+    line-height: 1.2;
+
+    margin-bottom: 13px;
+
+}
+
+
+.dark .section-head h2 {
+
+    color: var(--gold-light);
+
+}
+
+
+.section-head p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   UNIVERSITY STATS
+========================================================= */
+
+.stats-section {
+
+    background: var(--green);
+
+    color: white;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.stats-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 600px;
+
+    height: 600px;
+
+    border: 1px solid rgba(255,255,255,.06);
+
+    border-radius: 50%;
+
+    right: -250px;
+
+    top: -200px;
+
+}
+
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+}
+
+
+.stat {
+
+    text-align: center;
+
+    padding: 20px;
+
+    border-right: 1px solid rgba(255,255,255,.12);
+
+    position: relative;
+
+}
+
+
+.stat:last-child {
+
+    border: none;
+
+}
+
+
+.stat-icon {
+
+    color: var(--gold-light);
+
+    font-size: 22px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.stat-number {
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 39px;
+
+    font-weight: 700;
+
+}
+
+
+.stat-label {
+
+    color: rgba(255,255,255,.65);
+
+    font-size: 10px;
+
+    margin-top: 4px;
+
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about {
+
+    background: var(--white);
+
+}
+
+
+.about-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        .9fr 1.1fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+}
+
+
+.about-image {
+
+    position: relative;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+}
+
+
+.about-image img {
+
+    height: 480px;
+
+    object-fit: cover;
+
+}
+
+
+.image-label {
+
+    position: absolute;
+
+    left: 20px;
+
+    bottom: 20px;
+
+    background: var(--green);
+
+    color: white;
+
+    padding: 12px 16px;
+
+    border-radius: 5px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.about-content h2 {
+
+    font-family: "Noto Serif", serif;
+
+    color: var(--green);
+
+    font-size: 40px;
+
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+
+}
+
+
+.about-content p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.about-points {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+
+    margin: 25px 0;
+
+}
+
+
+.about-point {
+
+    padding: 15px;
+
+    background: var(--bg);
+
+    border-radius: 8px;
+
+    border: 1px solid var(--border);
+
+}
+
+
+.about-point i {
+
+    color: var(--gold);
+
+    margin-right: 7px;
+
+}
+
+
+.about-point span {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   FACULTIES
+========================================================= */
+
+.faculties {
+
+    background: var(--bg);
+
+}
+
+
+.faculty-tabs {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 35px;
+
+}
+
+
+.faculty-tab {
+
+    border: 1px solid var(--border);
+
+    background: var(--white);
+
+    padding: 10px 15px;
+
+    border-radius: 30px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    transition: .25s;
+
+}
+
+
+.faculty-tab.active,
+.faculty-tab:hover {
+
+    background: var(--green);
+
+    color: white;
+
+    border-color: var(--green);
+
+}
+
+
+.faculty-panel {
+
+    display: none;
+
+}
+
+
+.faculty-panel.active {
+
+    display: block;
+
+    animation:
+        fadeUp .5s ease;
+
+}
+
+
+.faculty-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1.4fr;
+
+    gap: 25px;
+
+}
+
+
+.faculty-intro {
+
+    background: var(--green);
+
+    color: white;
+
+    border-radius: 12px;
+
+    padding: 35px;
+
+}
+
+
+.faculty-intro h3 {
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 27px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.faculty-intro p {
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 12px;
+
+}
+
+
+.faculty-intro .faculty-number {
+
+    color: var(--gold-light);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+
+}
+
+
+.department-list {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+
+}
+
+
+.department-item {
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    padding: 23px;
+
+    border-radius: 10px;
+
+    transition: .3s;
+
+}
+
+
+.department-item:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow-small);
+
+}
+
+
+.department-item .number {
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.department-item h4 {
+
+    color: var(--green);
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 17px;
+
+    line-height: 1.35;
+
+    margin: 12px 0;
+
+}
+
+
+.department-item p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.department-link {
+
+    display: inline-block;
+
+    margin-top: 15px;
+
+    color: var(--green);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   RESEARCH
+========================================================= */
+
+.research {
+
+    background: var(--green-dark);
+
+    color: white;
+
+}
+
+
+.research .section-head h2 {
+
+    color: white;
+
+}
+
+
+.research .section-head p {
+
+    color: rgba(255,255,255,.65);
+
+}
+
+
+.research-tabs {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 35px;
+
+}
+
+
+.research-tab {
+
+    border: 1px solid rgba(255,255,255,.16);
+
+    background: rgba(255,255,255,.04);
+
+    color: rgba(255,255,255,.65);
+
+    padding: 9px 15px;
+
+    border-radius: 30px;
+
+    font-size: 10px;
+
+}
+
+
+.research-tab.active {
+
+    background: var(--gold);
+
+    border-color: var(--gold);
+
+    color: white;
+
+}
+
+
+.research-panel {
+
+    display: none;
+
+}
+
+
+.research-panel.active {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 15px;
+
+    animation:
+        fadeUp .4s ease;
+
+}
+
+
+.research-card {
+
+    padding: 27px;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    background: rgba(255,255,255,.045);
+
+    border-radius: 10px;
+
+    transition: .3s;
+
+}
+
+
+.research-card:hover {
+
+    transform: translateY(-5px);
+
+    background: rgba(255,255,255,.08);
+
+}
+
+
+.research-card i {
+
+    color: var(--gold-light);
+
+    font-size: 25px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.research-card h3 {
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 17px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.research-card p {
+
+    color: rgba(255,255,255,.58);
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   LABS
+========================================================= */
+
+.labs {
+
+    background: var(--white);
+
+}
+
+
+.lab-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.3fr 1fr 1fr;
+
+    grid-template-rows:
+        250px 250px;
+
+    gap: 15px;
+
+}
+
+
+.lab-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+}
+
+
+.lab-card:first-child {
+
+    grid-row: span 2;
+
+}
+
+
+.lab-card img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: .6s;
+
+}
+
+
+.lab-card:hover img {
+
+    transform: scale(1.08);
+
+}
+
+
+.lab-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    padding: 23px;
+
+    background:
+        linear-gradient(
+            transparent 30%,
+            rgba(0,0,0,.78)
+        );
+
+    color: white;
+
+}
+
+
+.lab-overlay span {
+
+    color: var(--gold-light);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.lab-overlay h3 {
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 19px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   VC
+========================================================= */
+
+.vc {
+
+    background: var(--bg);
+
+}
+
+
+.vc-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        360px 1fr;
+
+    gap: 60px;
+
+    align-items: center;
+
+}
+
+
+.vc-photo {
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    background: var(--green);
+
+    min-height: 420px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.vc-placeholder {
+
+    text-align: center;
+
+    color: white;
+
+    padding: 30px;
+
+}
+
+
+.vc-placeholder i {
+
+    font-size: 75px;
+
+    color: var(--gold-light);
+
+    margin-bottom: 15px;
+
+}
+
+
+.vc-placeholder p {
+
+    font-size: 11px;
+
+    opacity: .7;
+
+}
+
+
+.vc-content h2 {
+
+    font-family: "Noto Serif", serif;
+
+    color: var(--green);
+
+    font-size: 36px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.vc-content p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.quote {
+
+    border-left: 4px solid var(--gold);
+
+    padding-left: 20px;
+
+    margin: 25px 0;
+
+    color: var(--text);
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 16px;
+
+}
+
+
+.vc-name {
+
+    color: var(--green);
+
+    font-weight: 800;
+
+    font-size: 13px;
+
+}
+
+
+.vc-title {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   RESEARCH NUMBERS
+========================================================= */
+
+.research-numbers {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 15px;
+
+    margin-top: 40px;
+
+}
+
+
+.research-number {
+
+    text-align: center;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    padding: 20px;
+
+    border-radius: 9px;
+
+}
+
+
+.research-number strong {
+
+    display: block;
+
+    color: var(--gold-light);
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 28px;
+
+}
+
+
+.research-number span {
+
+    color: rgba(255,255,255,.55);
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   NEWS
+========================================================= */
+
+.news {
+
+    background: var(--bg);
+
+}
+
+
+.news-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr 1fr 1fr;
+
+    gap: 18px;
+
+}
+
+
+.news-card {
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    transition: .3s;
+
+}
+
+
+.news-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow-small);
+
+}
+
+
+.news-image {
+
+    height: 210px;
+
+    overflow: hidden;
+
+}
+
+
+.news-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: .5s;
+
+}
+
+
+.news-card:hover .news-image img {
+
+    transform: scale(1.06);
+
+}
+
+
+.news-body {
+
+    padding: 22px;
+
+}
+
+
+.news-date {
+
+    color: var(--gold);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.news-body h3 {
+
+    font-family: "Noto Serif", serif;
+
+    color: var(--green);
+
+    font-size: 17px;
+
+    line-height: 1.35;
+
+    margin: 9px 0;
+
+}
+
+
+.news-body p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.read-more {
+
+    margin-top: 15px;
+
+    display: inline-block;
+
+    color: var(--green);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    border: none;
+
+    background: transparent;
+
+}
+
+
+/* =========================================================
+   CLUBS
+========================================================= */
+
+.clubs {
+
+    background: var(--white);
+
+}
+
+
+.club-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap: 12px;
+
+}
+
+
+.club {
+
+    padding: 25px 15px;
+
+    text-align: center;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    transition: .3s;
+
+}
+
+
+.club:hover {
+
+    background: var(--green);
+
+    color: white;
+
+    transform: translateY(-5px);
+
+}
+
+
+.club i {
+
+    font-size: 22px;
+
+    color: var(--gold);
+
+    margin-bottom: 12px;
+
+}
+
+
+.club h3 {
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   DIGITAL SERVICES
+========================================================= */
+
+.digital {
+
+    background: var(--bg);
+
+}
+
+
+.digital-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 15px;
+
+}
+
+
+.digital-card {
+
+    background: var(--white);
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--border);
+
+    transition: .3s;
+
+}
+
+
+.digital-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow-small);
+
+}
+
+
+.digital-card i {
+
+    font-size: 28px;
+
+    color: var(--green);
+
+    margin-bottom: 18px;
+
+}
+
+
+.digital-card h3 {
+
+    font-family: "Noto Serif", serif;
+
+    color: var(--green);
+
+    font-size: 17px;
+
+}
+
+
+.digital-card p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin: 8px 0 15px;
+
+}
+
+
+.digital-card a {
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   ADMISSION CTA
+========================================================= */
+
+.admission {
+
+    background: var(--white);
+
+}
+
+
+.admission-box {
+
+    background:
+
+        linear-gradient(
+            110deg,
+            var(--green),
+            var(--green-3)
+        );
+
+    color: white;
+
+    padding: 55px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    overflow: hidden;
+
+    position: relative;
+
+}
+
+
+.admission-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 50%;
+
+    right: -250px;
+
+    top: -250px;
+
+}
+
+
+.admission-content {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.admission-content h2 {
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 34px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.admission-content p {
+
+    max-width: 650px;
+
+    color: rgba(255,255,255,.7);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+
+    background: var(--bg);
+
+}
+
+
+.contact-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 15px;
+
+}
+
+
+.contact-card {
+
+    background: var(--white);
+
+    padding: 30px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    text-align: center;
+
+}
+
+
+.contact-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--bg-2);
+
+    color: var(--green);
+
+    border-radius: 50%;
+
+    margin: auto auto 15px;
+
+}
+
+
+.contact-card h3 {
+
+    font-family: "Noto Serif", serif;
+
+    color: var(--green);
+
+    font-size: 17px;
+
+}
+
+
+.contact-card p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin-top: 6px;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    background: #041c14;
+
+    color: white;
+
+}
+
+
+.footer-main {
+
+    padding: 65px 0 45px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr 1fr;
+
+    gap: 40px;
+
+}
+
+
+.footer-brand {
+
+    display: flex;
+
+    gap: 13px;
+
+    align-items: flex-start;
+
+}
+
+
+.footer-brand img {
+
+    width: 65px;
+
+    height: 65px;
+
+    object-fit: contain;
+
+}
+
+
+.footer-brand h3 {
+
+    font-family: "Noto Serif", serif;
+
+    font-size: 15px;
+
+    line-height: 1.35;
+
+}
+
+
+.footer-description {
+
+    margin-top: 18px;
+
+    color: rgba(255,255,255,.5);
+
+    font-size: 11px;
+
+    max-width: 360px;
+
+}
+
+
+.footer-column h4 {
+
+    color: var(--gold-light);
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 17px;
+
+}
+
+
+.footer-column a {
+
+    display: block;
+
+    color: rgba(255,255,255,.58);
+
+    font-size: 11px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.footer-column a:hover {
+
+    color: white;
+
+}
+
+
+.footer-bottom {
+
+    border-top: 1px solid rgba(255,255,255,.1);
+
+    padding: 20px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: rgba(255,255,255,.4);
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   SEARCH MODAL
+========================================================= */
+
+.search-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.72);
+
+    backdrop-filter: blur(8px);
+
+    z-index: 5000;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    padding-top: 15vh;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .3s;
+
+}
+
+
+.search-overlay.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+.search-box {
+
+    width: min(700px,90%);
+
+    background: var(--white);
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+}
+
+
+.search-input {
+
+    width: 100%;
+
+    padding: 17px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    font-size: 15px;
+
+}
+
+
+.search-results {
+
+    margin-top: 15px;
+
+}
+
+
+.search-result {
+
+    padding: 13px;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 12px;
+
+}
+
+
+.search-result:hover {
+
+    background: var(--bg);
+
+}
+
+
+/* =========================================================
+   NEWS MODAL
+========================================================= */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.7);
+
+    backdrop-filter: blur(5px);
+
+    z-index: 4000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .3s;
+
+}
+
+
+.modal.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+.modal-content {
+
+    width: min(700px,100%);
+
+    max-height: 85vh;
+
+    overflow: auto;
+
+    background: var(--white);
+
+    border-radius: 12px;
+
+    padding: 35px;
+
+    position: relative;
+
+}
+
+
+.modal-close {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 15px;
+
+    width: 35px;
+
+    height: 35px;
+
+    border-radius: 50%;
+
+    border: 1px solid var(--border);
+
+    background: transparent;
+
+    color: var(--text);
+
+}
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+.lightbox {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.92);
+
+    z-index: 6000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .3s;
+
+}
+
+
+.lightbox.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+.lightbox img {
+
+    max-width: 95%;
+
+    max-height: 85vh;
+
+    width: auto;
+
+    border-radius: 5px;
+
+}
+
+
+.lightbox-close {
+
+    position: absolute;
+
+    top: 25px;
+
+    right: 30px;
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 30px;
+
+}
+
+
+/* =========================================================
+   FLOATING BUTTONS
+========================================================= */
+
+.floating-tools {
+
+    position: fixed;
+
+    right: 18px;
+
+    bottom: 20px;
+
+    z-index: 1000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.float-btn {
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: var(--green);
+
+    color: white;
+
+    box-shadow: var(--shadow-small);
+
+}
+
+
+.float-btn:hover {
+
+    background: var(--gold);
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal {
+
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    transition:
+        opacity .7s,
+        transform .7s;
+
+}
+
+
+.reveal.visible {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px) {
+
+    .nav {
+
+        gap: 12px;
+
+    }
+
+    .quick-grid {
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+    }
+
+    .quick-card:nth-child(3) {
+
+        border-right: none;
+
+    }
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+    }
+
+    .stat:nth-child(3) {
+
+        border-right: none;
+
+    }
+
+    .research-panel.active {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+    .club-grid {
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+    }
+
+    .digital-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:850px) {
+
+    .topbar-left {
+
+        display: none;
+
+    }
+
+    .topbar-inner {
+
+        justify-content: center;
+
+    }
+
+
+    .nav {
+
+        position: absolute;
+
+        top: 92px;
+
+        left: 0;
+
+        width: 100%;
+
+        background: var(--white);
+
+        border-top: 1px solid var(--border);
+
+        padding: 15px 5%;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        box-shadow: var(--shadow);
+
+    }
+
+
+    .nav.active {
+
+        display: flex;
+
+    }
+
+
+    .nav-link {
+
+        padding: 11px 0;
+
+    }
+
+
+    .nav-link::after {
+
+        display: none;
+
+    }
+
+
+    .nav-dropdown .dropdown-menu {
+
+        position: static;
+
+        transform: none;
+
+        width: 100%;
+
+        box-shadow: none;
+
+        border: none;
+
+        display: none;
+
+        opacity: 1;
+
+        visibility: visible;
+
+    }
+
+
+    .nav-dropdown.open .dropdown-menu {
+
+        display: block;
+
+    }
+
+
+    .nav-tools {
+
+        margin-top: 10px;
+
+        padding-top: 10px;
+
+        border-top: 1px solid var(--border);
+
+    }
+
+
+    .mobile-toggle {
+
+        display: block;
+
+    }
+
+
+    .about-grid,
+    .vc-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .vc-photo {
+
+        max-width: 400px;
+
+    }
+
+
+    .faculty-layout {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .news-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .news-card:first-child {
+
+        grid-column:
+            span 2;
+
+    }
+
+
+    .footer-main {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .brand img {
+
+        width: 54px;
+
+        height: 54px;
+
+    }
+
+
+    .brand-title {
+
+        font-size: 11px;
+
+        max-width: 180px;
+
+    }
+
+
+    .brand-subtitle {
+
+        display: none;
+
+    }
+
+
+    .navbar {
+
+        min-height: 75px;
+
+    }
+
+
+    .nav {
+
+        top: 75px;
+
+    }
+
+
+    .hero,
+    .hero-content {
+
+        min-height: 570px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 40px;
+
+    }
+
+
+    .quick-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .quick-card {
+
+        border-bottom: 1px solid var(--border);
+
+    }
+
+
+    .stats-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .stat:nth-child(2),
+    .stat:nth-child(4) {
+
+        border-right: none;
+
+    }
+
+
+    .stat:nth-child(3) {
+
+        border-right: 1px solid rgba(255,255,255,.12);
+
+    }
+
+
+    .section {
+
+        padding: 65px 0;
+
+    }
+
+
+    .about-points {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .department-list {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .research-panel.active {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .lab-grid {
+
+        grid-template-columns:
+            1fr;
+
+        grid-template-rows:
+            repeat(3,230px);
+
+    }
+
+
+    .lab-card:first-child {
+
+        grid-row: auto;
+
+    }
+
+
+    .news-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .news-card:first-child {
+
+        grid-column: auto;
+
+    }
+
+
+    .club-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .digital-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .research-numbers {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .admission-box {
+
+        padding: 35px 25px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .contact-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .footer-main {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .footer-bottom {
+
+        flex-direction: column;
+
+        gap: 8px;
+
+    }
+
+}
+
+
+/* =========================================================
+   INTERACTIVE UI ENHANCEMENTS — UFTB MODERN EDITION
+========================================================= */
+
+:root{
+    --glass:rgba(255,255,255,.72);
+    --glass-border:rgba(255,255,255,.25);
+    --accent:var(--gold);
+}
+
+body.dark{
+    --glass:rgba(16,35,27,.78);
+    --glass-border:rgba(255,255,255,.08);
+}
+
+body::selection{
+    background:var(--gold);
+    color:#fff;
+}
+
+.scroll-progress{
+    position:fixed;
+    left:0;
+    top:0;
+    width:0;
+    height:3px;
+    z-index:12000;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light),#fff);
+    box-shadow:0 0 14px rgba(201,154,53,.55);
+}
+
+.cursor-glow{
+    position:fixed;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:1;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(201,154,53,.13),transparent 68%);
+    mix-blend-mode:multiply;
+    opacity:0;
+    transition:opacity .25s ease;
+}
+
+body.dark .cursor-glow{
+    mix-blend-mode:screen;
+    opacity:.6;
+}
+
+body:hover .cursor-glow{
+    opacity:1;
+}
+
+.hero-content{
+    position:relative;
+}
+
+.hero-command{
+    position:absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    width:320px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:18px;
+    background:rgba(3,31,22,.48);
+    backdrop-filter:blur(18px);
+    box-shadow:0 25px 70px rgba(0,0,0,.22);
+    z-index:4;
+}
+
+.command-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.command-live{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    color:#dff7e9;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.4px;
+}
+
+.command-live::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#7be495;
+    box-shadow:0 0 0 5px rgba(123,228,149,.12);
+    animation:pulseDot 1.8s infinite;
+}
+
+.command-clock{
+    color:var(--gold-light);
+    font-size:10px;
+    font-weight:800;
+}
+
+.command-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.command-chip{
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    border-radius:12px;
+    padding:12px;
+    text-align:left;
+    transition:.25s;
+}
+
+.command-chip:hover{
+    transform:translateY(-3px);
+    background:rgba(255,255,255,.11);
+    border-color:rgba(232,200,107,.55);
+}
+
+.command-chip strong{
+    display:block;
+    font-family:"Noto Serif",serif;
+    font-size:20px;
+    color:var(--gold-light);
+}
+
+.command-chip span{
+    display:block;
+    margin-top:2px;
+    color:rgba(255,255,255,.62);
+    font-size:8px;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+}
+
+.hero-scroll{
+    position:absolute;
+    right:28px;
+    bottom:28px;
+    z-index:5;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:rgba(255,255,255,.62);
+    font-size:9px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    writing-mode:vertical-rl;
+}
+
+.hero-scroll-line{
+    width:1px;
+    height:42px;
+    background:linear-gradient(var(--gold),transparent);
+}
+
+.stats-section .stat{
+    cursor:default;
+    transition:transform .3s ease,background .3s ease;
+}
+
+.stats-section .stat:hover{
+    transform:translateY(-6px);
+    background:rgba(255,255,255,.04);
+}
+
+.faculty-tab{
+    position:relative;
+    overflow:hidden;
+}
+
+.faculty-tab::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.18),transparent);
+    transform:translateX(-110%);
+    transition:.45s;
+}
+
+.faculty-tab:hover::before{
+    transform:translateX(110%);
+}
+
+.department-item,
+.research-card,
+.lab-card,
+.news-card,
+.club,
+.digital-card,
+.contact-card{
+    will-change:transform;
+}
+
+.tilt-card{
+    transform-style:preserve-3d;
+}
+
+.vc{
+    position:relative;
+    overflow:hidden;
+}
+
+.vc::before{
+    content:"";
+    position:absolute;
+    width:520px;
+    height:520px;
+    border-radius:50%;
+    border:1px solid rgba(6,59,42,.08);
+    left:-250px;
+    bottom:-280px;
+}
+
+.vc-photo{
+    position:relative;
+    min-height:500px;
+    padding:0;
+    background:
+        linear-gradient(145deg,#063b2a,#0a7650);
+    box-shadow:0 25px 60px rgba(3,31,22,.16);
+}
+
+.vc-photo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.42));
+    pointer-events:none;
+}
+
+.vc-photo img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    object-position:center top;
+    transition:transform .7s ease;
+}
+
+.vc-photo:hover img{
+    transform:scale(1.035);
+}
+
+.vc-badge{
+    position:absolute;
+    left:18px;
+    bottom:18px;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 13px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:12px;
+    color:#fff;
+    background:rgba(3,31,22,.6);
+    backdrop-filter:blur(12px);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.vc-badge i{color:var(--gold-light);}
+
+.vc-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:20px 0;
+}
+
+.vc-pill{
+    padding:8px 10px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:var(--white);
+    color:var(--muted);
+    font-size:9px;
+    font-weight:700;
+}
+
+.vc-pill i{
+    color:var(--gold);
+    margin-right:5px;
+}
+
+.research-number{
+    transition:.3s;
+}
+
+.research-number:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.04);
+}
+
+.news-card{
+    position:relative;
+}
+
+.news-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:10px;
+    border:1px solid transparent;
+    transition:.3s;
+    pointer-events:none;
+}
+
+.news-card:hover::after{
+    border-color:rgba(201,154,53,.35);
+}
+
+.interactive-strip{
+    margin-top:35px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    padding:18px 20px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:linear-gradient(135deg,var(--white),var(--bg-2));
+}
+
+.interactive-strip strong{
+    color:var(--green);
+    font-family:"Noto Serif",serif;
+    font-size:15px;
+}
+
+.interactive-strip span{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.quick-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.quick-card::after{
+    content:"→";
+    position:absolute;
+    right:10px;
+    bottom:8px;
+    color:var(--gold);
+    font-size:11px;
+    opacity:0;
+    transform:translateX(-5px);
+    transition:.25s;
+}
+
+.quick-card:hover::after{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.float-btn{
+    transition:.25s;
+}
+
+.float-btn.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+#topBtn{
+    opacity:0;
+    transform:translateY(10px);
+    transition:.25s;
+}
+
+.ripple{
+    position:absolute;
+    border-radius:50%;
+    transform:scale(0);
+    animation:ripple .55s linear;
+    background:rgba(255,255,255,.38);
+    pointer-events:none;
+}
+
+.btn,.icon-btn,.admission-btn,.faculty-tab,.research-tab,.float-btn{
+    position:relative;
+    overflow:hidden;
+}
+
+@keyframes ripple{
+    to{transform:scale(4);opacity:0;}
+}
+
+@keyframes pulseDot{
+    50%{box-shadow:0 0 0 9px rgba(123,228,149,0);}
+}
+
+@media(max-width:1100px){
+    .hero-command{
+        width:280px;
+        right:2%;
+    }
+}
+
+@media(max-width:850px){
+    .hero-command{
+        position:relative;
+        top:auto;
+        right:auto;
+        transform:none;
+        width:min(100%,430px);
+        margin:25px 0 80px;
+    }
+    .hero-content{
+        align-items:flex-start;
+        padding-top:90px;
+    }
+    .hero-scroll{
+        display:none;
+    }
+    .vc-photo,
+    .vc-photo img{
+        min-height:430px;
+        height:430px;
+    }
+}
+
+@media(max-width:600px){
+    .hero-command{
+        padding:13px;
+    }
+    .command-chip{
+        padding:10px;
+    }
+    .interactive-strip{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+
+
+.vc-photo-fallback::before{
+    content:"Official VC profile";
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-family:"Noto Serif",serif;
+    font-size:20px;
+    background:linear-gradient(145deg,#063b2a,#0a7650);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+
+<!-- =========================================================
+     PRELOADER
+========================================================= -->
+
+<div class="preloader" id="preloader">
+
+    <div class="loader">
+
+        <img
+            src="https://uftb.ac.bd/uploads/settings/17663114199270.png"
+            alt="UFTB Logo"
+        >
+
+        <p>
+            UNIVERSITY OF FRONTIER TECHNOLOGY, BANGLADESH
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
+<div class="topbar">
+
+    <div class="container topbar-inner">
+
+        <div class="topbar-left">
+
+            <span>
+                <i class="fa-solid fa-landmark"></i>
+                Government of the People's Republic of Bangladesh
+            </span>
+
+            <span>
+                <i class="fa-solid fa-location-dot"></i>
+                Kaliakair, Gazipur
+            </span>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <a href="#" id="banglaBtn">
+                বাংলা
+            </a>
+
+            <a href="mailto:info@uftb.ac.bd">
+                <i class="fa-solid fa-envelope"></i>
+                info@uftb.ac.bd
+            </a>
+
+            <a href="tel:09666775534">
+                <i class="fa-solid fa-phone"></i>
+                09666775534
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header" id="header">
+
+<div class="container navbar">
+
+
+    <a href="#home" class="brand">
+
+        <img
+            src="https://uftb.ac.bd/uploads/settings/17663114199270.png"
+            alt="University of Frontier Technology Bangladesh Logo"
+        >
+
+        <div class="brand-text">
+
+            <div class="brand-title">
+                University of Frontier Technology, Bangladesh
+            </div>
+
+            <div class="brand-subtitle">
+                TECHNOLOGY • RESEARCH • INNOVATION
+            </div>
+
+        </div>
+
+    </a>
+
+
+
+    <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        aria-label="Open navigation"
+    >
+
+        <i class="fa-solid fa-bars"></i>
+
+    </button>
+
+
+
+    <nav class="nav" id="mainNav">
+
+
+        <a
+            class="nav-link active"
+            href="#home"
+        >
+            Home
+        </a>
+
+
+        <div class="nav-dropdown">
+
+            <a
+                class="nav-link"
+                href="#academics"
+            >
+                Academics
+                <i class="fa-solid fa-chevron-down"
+                   style="font-size:8px"></i>
+            </a>
+
+
+            <div class="dropdown-menu">
+
+                <a href="#academics">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Faculties & Departments
+                </a>
+
+                <a href="#academics">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Academic Programs
+                </a>
+
+                <a href="#digital">
+                    <i class="fa-solid fa-calendar"></i>
+                    Academic Calendar
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <a
+            class="nav-link"
+            href="#research"
+        >
+            Research
+        </a>
+
+
+        <a
+            class="nav-link"
+            href="#labs"
+        >
+            Labs
+        </a>
+
+
+        <a
+            class="nav-link"
+            href="#news"
+        >
+            News
+        </a>
+
+
+        <a
+            class="nav-link"
+            href="#contact"
+        >
+            Contact
+        </a>
+
+
+        <div class="nav-tools">
+
+            <button
+                class="icon-btn"
+                id="searchBtn"
+                title="Search"
+            >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </button>
+
+
+            <button
+                class="icon-btn"
+                id="themeBtn"
+                title="Toggle theme"
+            >
+
+                <i class="fa-solid fa-moon"></i>
+
+            </button>
+
+
+            <a
+                href="#admission"
+                class="admission-btn"
+            >
+                Admissions
+            </a>
+
+        </div>
+
+    </nav>
+
+</div>
+
+</header>
+
+
+
+<!-- =========================================================
+     NOTICE
+========================================================= -->
+
+<div class="notice">
+
+<div class="container notice-inner">
+
+    <div class="notice-label">
+
+        <i class="fa-solid fa-bullhorn"></i>
+        NOTICE
+
+    </div>
+
+
+    <div class="notice-track">
+
+        <div class="notice-content">
+
+            Welcome to the University of Frontier Technology, Bangladesh
+            • Explore UFTB's technology-focused academic programs
+            • Research, innovation and entrepreneurship
+            • Official information: uftb.ac.bd
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero" id="home">
+
+
+    <div
+        class="hero-slide active"
+        data-slide="0"
+    >
+
+        <div class="container hero-content">
+
+            <div class="hero-copy">
+
+                <div class="hero-kicker">
+                    SPECIALIZED PUBLIC UNIVERSITY OF BANGLADESH
+                </div>
+
+                <h1>
+                    Where
+                    <span>
+                        technology
+                    </span>
+                    meets tomorrow.
+                </h1>
+
+                <p class="hero-description">
+
+                    University of Frontier Technology, Bangladesh
+                    is dedicated to higher education, research,
+                    innovation and technology-driven human resource
+                    development for the Fourth Industrial Revolution
+                    and beyond.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#academics"
+                        class="btn btn-gold"
+                    >
+                        Explore Academics
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+
+                    <a
+                        href="#about"
+                        class="btn btn-outline"
+                    >
+                        Discover UFTB
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div
+        class="hero-slide"
+        data-slide="1"
+    >
+
+        <div class="container hero-content">
+
+            <div class="hero-copy">
+
+                <div class="hero-kicker">
+                    LEARN • BUILD • INNOVATE
+                </div>
+
+                <h1>
+                    From
+                    <span>
+                        classroom
+                    </span>
+                    to real-world impact.
+                </h1>
+
+                <p class="hero-description">
+
+                    Smart classrooms, modern laboratories,
+                    project-based learning and technology-focused
+                    research help UFTB students turn knowledge into
+                    practical solutions.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#labs"
+                        class="btn btn-gold"
+                    >
+                        Explore Laboratories
+                    </a>
+
+                    <a
+                        href="#research"
+                        class="btn btn-outline"
+                    >
+                        Research at UFTB
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div
+        class="hero-slide"
+        data-slide="2"
+    >
+
+        <div class="container hero-content">
+
+            <div class="hero-copy">
+
+                <div class="hero-kicker">
+                    4IR • 5IR • FRONTIER TECHNOLOGY
+                </div>
+
+                <h1>
+                    Build the
+                    <span>
+                        future
+                    </span>
+                    from Bangladesh.
+                </h1>
+
+                <p class="hero-description">
+
+                    Artificial intelligence, data science,
+                    robotics, software engineering, cybersecurity
+                    and educational technology form the core of
+                    UFTB's technology ecosystem.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#research"
+                        class="btn btn-gold"
+                    >
+                        Explore Research
+                    </a>
+
+                    <a
+                        href="#admission"
+                        class="btn btn-outline"
+                    >
+                        Admission Information
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    
+<div class="hero-command" aria-label="UFTB live snapshot">
+    <div class="command-top">
+        <span class="command-live">UFTB LIVE SNAPSHOT</span>
+        <span class="command-clock" id="heroClock">--:--:--</span>
+    </div>
+    <div class="command-grid">
+        <a class="command-chip" href="#academics">
+            <strong>4</strong><span>Technology Faculties</span>
+        </a>
+        <a class="command-chip" href="#academics">
+            <strong>6</strong><span>Total Departments</span>
+        </a>
+        <a class="command-chip" href="#research">
+            <strong>193</strong><span>Journals</span>
+        </a>
+        <a class="command-chip" href="#leadership">
+            <strong>VC</strong><span>Prof. Dr. Md. Moktar Ali</span>
+        </a>
+    </div>
+</div>
+
+<div class="hero-scroll">
+    <span>Scroll to explore</span>
+    <span class="hero-scroll-line"></span>
+</div>
+
+<div class="hero-dots">
+
+        <button
+            class="hero-dot active"
+            data-slide="0"
+        ></button>
+
+        <button
+            class="hero-dot"
+            data-slide="1"
+        ></button>
+
+        <button
+            class="hero-dot"
+            data-slide="2"
+        ></button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     QUICK ACCESS
+========================================================= -->
+
+<section class="quick-access">
+
+<div class="container quick-grid">
+
+
+    <a
+        href="#admission"
+        class="quick-card"
+    >
+
+        <i class="fa-solid fa-graduation-cap"></i>
+
+        <h3>
+            Admissions
+        </h3>
+
+        <p>
+            Programs & notices
+        </p>
+
+    </a>
+
+
+    <a
+        href="#academics"
+        class="quick-card"
+    >
+
+        <i class="fa-solid fa-building-columns"></i>
+
+        <h3>
+            Academics
+        </h3>
+
+        <p>
+            Faculties & departments
+        </p>
+
+    </a>
+
+
+    <a
+        href="#research"
+        class="quick-card"
+    >
+
+        <i class="fa-solid fa-flask"></i>
+
+        <h3>
+            Research
+        </h3>
+
+        <p>
+            Research & innovation
+        </p>
+
+    </a>
+
+
+    <a
+        href="#labs"
+        class="quick-card"
+    >
+
+        <i class="fa-solid fa-microchip"></i>
+
+        <h3>
+            Laboratories
+        </h3>
+
+        <p>
+            Technology labs
+        </p>
+
+    </a>
+
+
+    <a
+        href="#clubs"
+        class="quick-card"
+    >
+
+        <i class="fa-solid fa-users"></i>
+
+        <h3>
+            Student Life
+        </h3>
+
+        <p>
+            Clubs & activities
+        </p>
+
+    </a>
+
+
+    <a
+        href="#digital"
+        class="quick-card"
+    >
+
+        <i class="fa-solid fa-laptop-code"></i>
+
+        <h3>
+            Digital Services
+        </h3>
+
+        <p>
+            LMS • UMS • E-Library
+        </p>
+
+    </a>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section
+    class="section about reveal"
+    id="about"
+>
+
+<div class="container about-grid">
+
+
+    <div class="about-image">
+
+        <img
+            src="https://uftb.ac.bd/uploads/topics/17611140117998.jpg"
+            alt="UFTB computer laboratory"
+        >
+
+        <div class="image-label">
+
+            <i class="fa-solid fa-computer"></i>
+            TECHNOLOGY-ENABLED LEARNING
+
+        </div>
+
+    </div>
+
+
+    <div class="about-content">
+
+        <div class="eyebrow">
+            ABOUT THE UNIVERSITY
+        </div>
+
+        <h2>
+            A university built around frontier technology.
+        </h2>
+
+
+        <p>
+
+            The University of Frontier Technology, Bangladesh
+            (UFTB) is a specialized public university located in
+            Kaliakair, Gazipur. The university was established
+            through an Act of Parliament in 2016, with academic
+            activities beginning in 2019.
+
+        </p>
+
+
+        <p>
+
+            UFTB's academic and research direction is strongly
+            connected to information technology, engineering,
+            emerging technologies, innovation and the needs of the
+            Fourth and Fifth Industrial Revolutions.
+
+        </p>
+
+
+        <div class="about-points">
+
+            <div class="about-point">
+
+                <i class="fa-solid fa-microchip"></i>
+
+                <span>
+                    Technology-focused education
+                </span>
+
+            </div>
+
+
+            <div class="about-point">
+
+                <i class="fa-solid fa-flask"></i>
+
+                <span>
+                    Research & innovation
+                </span>
+
+            </div>
+
+
+            <div class="about-point">
+
+                <i class="fa-solid fa-robot"></i>
+
+                <span>
+                    Emerging technologies
+                </span>
+
+            </div>
+
+
+            <div class="about-point">
+
+                <i class="fa-solid fa-earth-asia"></i>
+
+                <span>
+                    National & global impact
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="https://uftb.ac.bd/"
+            target="_blank"
+            class="btn btn-gold"
+        >
+
+            Official UFTB Website
+
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<section class="section stats-section">
+
+<div class="container stats-grid">
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+        </div>
+
+        <div
+            class="stat-number counter"
+            data-target="2018"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            FOUNDED / ESTABLISHED
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-chalkboard-user"></i>
+        </div>
+
+        <div
+            class="stat-number counter"
+            data-target="43"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            FACULTY MEMBERS
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-user-graduate"></i>
+        </div>
+
+        <div
+            class="stat-number counter"
+            data-target="732"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            REGULAR STUDENTS
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-building"></i>
+        </div>
+
+        <div
+            class="stat-number counter"
+            data-target="6"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            TOTAL DEPARTMENTS
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-people-group"></i>
+        </div>
+
+        <div
+            class="stat-number counter"
+            data-target="10"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            STUDENT CLUBS
+        </div>
+
+    </div>
+
+
+</div>
+
+</section>
+
+<div class="container">
+    <div class="interactive-strip">
+        <div>
+            <strong>UFTB today: technology, research & innovation</strong>
+            <span>Current public-facing figures are aligned with the university homepage and academic pages.</span>
+        </div>
+        <a class="btn btn-gold" href="https://uftb.ac.bd/" target="_blank" rel="noopener">
+            Verify on UFTB <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+    </div>
+</div>
+
+
+
+<!-- =========================================================
+     ACADEMICS
+========================================================= -->
+
+<section
+    class="section faculties"
+    id="academics"
+>
+
+<div class="container">
+
+
+    <div class="section-head">
+
+        <div class="eyebrow">
+            ACADEMICS
+        </div>
+
+        <h2>
+            Four faculties. Five student-admitting departments.
+        </h2>
+
+        <p>
+
+            UFTB currently organizes its academic structure across
+            four technology-focused faculties. Five departments
+            admit students, while General Education functions as a
+            supporting department.
+
+        </p>
+
+    </div>
+
+
+    <div class="faculty-tabs">
+
+
+        <button
+            class="faculty-tab active"
+            data-faculty="cyber"
+        >
+            Cyber-Physical Systems
+        </button>
+
+
+        <button
+            class="faculty-tab"
+            data-faculty="digital"
+        >
+            Digital Transformation
+        </button>
+
+
+        <button
+            class="faculty-tab"
+            data-faculty="software"
+        >
+            Software & Machine Intelligence
+        </button>
+
+
+        <button
+            class="faculty-tab"
+            data-faculty="security"
+        >
+            Security & Communication
+        </button>
+
+
+    </div>
+
+
+
+    <!-- FACULTY 1 -->
+
+    <div
+        class="faculty-panel active"
+        data-panel="cyber"
+    >
+
+        <div class="faculty-layout reveal">
+
+
+            <div class="faculty-intro">
+
+                <div class="faculty-number">
+                    FACULTY 01
+                </div>
+
+                <h3>
+                    Cyber-Physical Systems Engineering
+                </h3>
+
+                <p>
+
+                    Focused on the intersection of physical
+                    systems, computing, sensors, embedded
+                    technologies, robotics and intelligent
+                    automation.
+
+                </p>
+
+            </div>
+
+
+            <div class="department-list">
+
+
+                <div class="department-item">
+
+                    <span class="number">
+                        DEPARTMENT 01
+                    </span>
+
+                    <h4>
+                        Internet of Things and Robotics Engineering
+                    </h4>
+
+                    <p>
+                        Sensors, embedded systems, AI, machine
+                        learning, control systems and robotics.
+                    </p>
+
+                    <a
+                        href="https://ire.uftb.ac.bd/"
+                        target="_blank"
+                        class="department-link"
+                    >
+                        Department Website →
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FACULTY 2 -->
+
+    <div
+        class="faculty-panel"
+        data-panel="digital"
+    >
+
+        <div class="faculty-layout">
+
+
+            <div class="faculty-intro">
+
+                <div class="faculty-number">
+                    FACULTY 02
+                </div>
+
+                <h3>
+                    Digital Transformation Engineering
+                </h3>
+
+                <p>
+
+                    Focused on technology-enabled education,
+                    digital transformation and the changing
+                    landscape of learning.
+
+                </p>
+
+            </div>
+
+
+            <div class="department-list">
+
+
+                <div class="department-item">
+
+                    <span class="number">
+                        DEPARTMENT 02
+                    </span>
+
+                    <h4>
+                        Educational Technology and Engineering
+                    </h4>
+
+                    <p>
+                        Educational technology, digital learning,
+                        learning analytics and AI in education.
+                    </p>
+
+                    <a
+                        href="https://edte.uftb.ac.bd/"
+                        target="_blank"
+                        class="department-link"
+                    >
+                        Department Website →
+                    </a>
+
+                </div>
+
+
+                <div class="department-item">
+
+                    <span class="number">
+                        SUPPORTING DEPARTMENT
+                    </span>
+
+                    <h4>
+                        General Education
+                    </h4>
+
+                    <p>
+                        Supporting academic foundations across
+                        UFTB's technology-focused programs.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FACULTY 3 -->
+
+    <div
+        class="faculty-panel"
+        data-panel="software"
+    >
+
+        <div class="faculty-layout">
+
+
+            <div class="faculty-intro">
+
+                <div class="faculty-number">
+                    FACULTY 03
+                </div>
+
+                <h3>
+                    Software & Machine Intelligence Engineering
+                </h3>
+
+                <p>
+
+                    Bringing software engineering and data-driven
+                    machine intelligence together for modern
+                    technology development.
+
+                </p>
+
+            </div>
+
+
+            <div class="department-list">
+
+
+                <div class="department-item">
+
+                    <span class="number">
+                        DEPARTMENT 03
+                    </span>
+
+                    <h4>
+                        Software Engineering
+                    </h4>
+
+                    <p>
+                        Software design, development, testing,
+                        architecture and emerging technologies.
+                    </p>
+
+                    <a
+                        href="https://se.uftb.ac.bd/"
+                        target="_blank"
+                        class="department-link"
+                    >
+                        Department Website →
+                    </a>
+
+                </div>
+
+
+                <div class="department-item">
+
+                    <span class="number">
+                        DEPARTMENT 04
+                    </span>
+
+                    <h4>
+                        Data Science and Engineering
+                    </h4>
+
+                    <p>
+                        Machine learning, deep learning, analytics,
+                        statistics and data-driven research.
+                    </p>
+
+                    <a
+                        href="https://dse.uftb.ac.bd/"
+                        target="_blank"
+                        class="department-link"
+                    >
+                        Department Website →
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FACULTY 4 -->
+
+    <div
+        class="faculty-panel"
+        data-panel="security"
+    >
+
+        <div class="faculty-layout">
+
+
+            <div class="faculty-intro">
+
+                <div class="faculty-number">
+                    FACULTY 04
+                </div>
+
+                <h3>
+                    Security & Communication Engineering
+                </h3>
+
+                <p>
+
+                    Developing expertise in cybersecurity,
+                    secure systems, networks and communication
+                    technologies.
+
+                </p>
+
+            </div>
+
+
+            <div class="department-list">
+
+
+                <div class="department-item">
+
+                    <span class="number">
+                        DEPARTMENT 05
+                    </span>
+
+                    <h4>
+                        Cyber Security Engineering
+                    </h4>
+
+                    <p>
+                        Cyber defense, secure systems, networks,
+                        privacy and communication technologies.
+                    </p>
+
+                    <a
+                        href="https://cyse.uftb.ac.bd/"
+                        target="_blank"
+                        class="department-link"
+                    >
+                        Department Website →
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     RESEARCH
+========================================================= -->
+
+<section
+    class="section research"
+    id="research"
+>
+
+<div class="container">
+
+
+    <div class="section-head">
+
+        <div class="eyebrow">
+            RESEARCH & INNOVATION
+        </div>
+
+        <h2>
+            Research at the frontier.
+        </h2>
+
+        <p>
+
+            UFTB's research portfolio spans artificial
+            intelligence, data science, cybersecurity,
+            IoT, robotics, education technology and
+            interdisciplinary applications.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="research-tabs">
+
+
+        <button
+            class="research-tab active"
+            data-research="ai"
+        >
+            Artificial Intelligence
+        </button>
+
+
+        <button
+            class="research-tab"
+            data-research="data"
+        >
+            Data Science
+        </button>
+
+
+        <button
+            class="research-tab"
+            data-research="security"
+        >
+            Cybersecurity
+        </button>
+
+
+        <button
+            class="research-tab"
+            data-research="iot"
+        >
+            IoT & Robotics
+        </button>
+
+
+    </div>
+
+
+
+    <div
+        class="research-panel active"
+        data-research-panel="ai"
+    >
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-brain"></i>
+
+            <h3>
+                Explainable AI
+            </h3>
+
+            <p>
+                Research into interpretable AI systems,
+                including student performance prediction
+                and explainable machine learning.
+            </p>
+
+        </div>
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-language"></i>
+
+            <h3>
+                Bangla NLP
+            </h3>
+
+            <p>
+                Deep learning approaches for Bangla text
+                normalization, emotion classification and
+                expressive text-to-speech.
+            </p>
+
+        </div>
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <h3>
+                AI in Education
+            </h3>
+
+            <p>
+                Intelligent learning systems, personalized
+                learning and AI-assisted education.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div
+        class="research-panel"
+        data-research-panel="data"
+    >
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <h3>
+                Predictive Analytics
+            </h3>
+
+            <p>
+                Data-driven models for forecasting,
+                decision-making and real-world applications.
+            </p>
+
+        </div>
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-database"></i>
+
+            <h3>
+                Big Data
+            </h3>
+
+            <p>
+                Research involving large-scale datasets,
+                data mining and computational analysis.
+            </p>
+
+        </div>
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-disease"></i>
+
+            <h3>
+                Bioinformatics
+            </h3>
+
+            <p>
+                Machine learning and computational analysis
+                applied to biomedical research.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div
+        class="research-panel"
+        data-research-panel="security"
+    >
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h3>
+                Intrusion Detection
+            </h3>
+
+            <p>
+                Intelligent security frameworks for detecting
+                threats in software-defined networks.
+            </p>
+
+        </div>
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-lock"></i>
+
+            <h3>
+                Secure Systems
+            </h3>
+
+            <p>
+                Security engineering, privacy and dependable
+                computing systems.
+            </p>
+
+        </div>
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-network-wired"></i>
+
+            <h3>
+                Network Security
+            </h3>
+
+            <p>
+                Research focused on securing modern
+                communication infrastructure.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div
+        class="research-panel"
+        data-research-panel="iot"
+    >
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-robot"></i>
+
+            <h3>
+                Robotics
+            </h3>
+
+            <p>
+                Autonomous systems, robotics algorithms and
+                real-world engineering applications.
+            </p>
+
+        </div>
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-wifi"></i>
+
+            <h3>
+                IoT Systems
+            </h3>
+
+            <p>
+                Sensor networks, embedded systems and
+                connected intelligent devices.
+            </p>
+
+        </div>
+
+
+        <div class="research-card">
+
+            <i class="fa-solid fa-cloud"></i>
+
+            <h3>
+                Smart Applications
+            </h3>
+
+            <p>
+                IoT-driven applications integrating sensors,
+                mobile platforms and machine learning.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="research-numbers">
+
+
+        <div class="research-number">
+
+            <strong>
+                06
+            </strong>
+
+            <span>
+                Research Publication Award
+            </span>
+
+        </div>
+
+
+        <div class="research-number">
+
+            <strong>
+                20
+            </strong>
+
+            <span>
+                Funded Research
+            </span>
+
+        </div>
+
+
+        <div class="research-number">
+
+            <strong>
+                193
+            </strong>
+
+            <span>
+                Journals
+            </span>
+
+        </div>
+
+
+        <div class="research-number">
+
+            <strong>
+                141
+            </strong>
+
+            <span>
+                Conferences
+            </span>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     LABS / GALLERY
+========================================================= -->
+
+<section
+    class="section labs"
+    id="labs"
+>
+
+<div class="container">
+
+
+    <div class="section-head">
+
+        <div class="eyebrow">
+            LABORATORIES & TECHNOLOGY
+        </div>
+
+        <h2>
+            Learn by building.
+        </h2>
+
+        <p>
+
+            UFTB emphasizes laboratory-based and project-oriented
+            learning. The university currently highlights
+            specialized facilities including cybersecurity,
+            software architecture, graphics & animation and
+            deep learning laboratories.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="lab-grid reveal">
+
+
+        <div
+            class="lab-card lightbox-trigger"
+            data-image="https://uftb.ac.bd/uploads/topics/17611140117998.jpg"
+        >
+
+            <img
+                src="https://uftb.ac.bd/uploads/topics/17611140117998.jpg"
+                alt="UFTB Computer Laboratory"
+            >
+
+            <div class="lab-overlay">
+
+                <span>
+                    TECHNOLOGY LEARNING
+                </span>
+
+                <h3>
+                    Computer Laboratory
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="lab-card lightbox-trigger"
+            data-image="https://dse.uftb.ac.bd/assets/uploads/slider/home-slider-1760973781-sms.jpg"
+        >
+
+            <img
+                src="https://dse.uftb.ac.bd/assets/uploads/slider/home-slider-1760973781-sms.jpg"
+                alt="UFTB Data Science students"
+            >
+
+            <div class="lab-overlay">
+
+                <span>
+                    DATA SCIENCE
+                </span>
+
+                <h3>
+                    Student Research
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="lab-card lightbox-trigger"
+            data-image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=85"
+        >
+
+            <img
+                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=85"
+                alt="Cybersecurity technology"
+            >
+
+            <div class="lab-overlay">
+
+                <span>
+                    CYBER SECURITY
+                </span>
+
+                <h3>
+                    Cyber Security Lab
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="lab-card lightbox-trigger"
+            data-image="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
+        >
+
+            <img
+                src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
+                alt="Electronic technology"
+            >
+
+            <div class="lab-overlay">
+
+                <span>
+                    EMBEDDED TECHNOLOGY
+                </span>
+
+                <h3>
+                    IoT & Robotics
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     VICE CHANCELLOR
+========================================================= -->
+
+<section
+    class="section vc"
+    id="leadership"
+>
+
+<div class="container vc-grid">
+
+
+    <div class="vc-photo">
+        <img
+            src="https://uftb.ac.bd/uploads/topics/17870296022091.png"
+            alt="Professor Dr. Md. Moktar Ali, Vice-Chancellor of UFTB"
+            loading="eager"
+            referrerpolicy="no-referrer"
+        >
+
+    </div>
+
+
+
+    <div class="vc-content">
+
+        <div class="eyebrow">
+            MESSAGE FROM THE VICE-CHANCELLOR
+        </div>
+
+        <h2>
+            A future driven by knowledge,
+            technology and innovation.
+        </h2>
+
+
+        <p>
+
+            Professor Dr. Md. Moktar Ali currently serves as
+            Vice-Chancellor of the University of Frontier
+            Technology, Bangladesh.
+
+        </p>
+
+
+        <p>
+
+            His official message emphasizes academic excellence,
+            research, innovation, entrepreneurship, critical
+            thinking, interdisciplinary collaboration and
+            preparation for the Fourth Industrial Revolution
+            and beyond.
+
+        </p>
+
+
+        
+<div class="vc-meta">
+    <span class="vc-pill"><i class="fa-solid fa-graduation-cap"></i> PhD, University of Dhaka</span>
+    <span class="vc-pill"><i class="fa-solid fa-microchip"></i> Technology & innovation</span>
+    <span class="vc-pill"><i class="fa-solid fa-location-dot"></i> Kaliakair, Gazipur</span>
+</div>
+
+<div class="quote">
+
+            "Together, we can contribute to building a prosperous,
+            knowledge-based, and innovation-driven nation while
+            making meaningful contributions to the global community."
+
+        </div>
+
+
+        <div class="vc-name">
+            Professor Dr. Md. Moktar Ali
+        </div>
+
+        <div class="vc-title">
+            Vice-Chancellor<br>
+            University of Frontier Technology, Bangladesh
+        </div>
+
+
+        <br>
+
+
+        <a
+            href="https://uftb.ac.bd/top-administrator/prof-dr-md-moktar-ali"
+            target="_blank"
+            class="btn btn-gold"
+        >
+
+            Full VC Profile
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     NEWS
+========================================================= -->
+
+<section
+    class="section news"
+    id="news"
+>
+
+<div class="container">
+
+
+    <div class="section-head">
+
+        <div class="eyebrow">
+            NEWS & SUCCESS STORIES
+        </div>
+
+        <h2>
+            UFTB in motion.
+        </h2>
+
+        <p>
+            Recent university activities, achievements and
+            technology-focused initiatives.
+        </p>
+
+    </div>
+
+
+
+    <div class="news-grid reveal">
+
+
+        <article class="news-card">
+
+
+            <div class="news-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=85"
+                    alt="Robotics"
+                >
+
+            </div>
+
+
+            <div class="news-body">
+
+                <div class="news-date">
+                    08 AUGUST 2026
+                </div>
+
+                <h3>
+                    National Robotics Festival — RoboFusion 1.0
+                </h3>
+
+                <p>
+
+                    UFTB hosted RoboFusion 1.0 at Kaliakair Hi-Tech Park, bringing together students, innovators, engineers and technology enthusiasts.
+
+                </p>
+
+
+                <button
+                    class="read-more news-modal-btn"
+                    data-title="RoboFusion 1.0"
+                    data-date="08 August 2026"
+                    data-text="The UFTB Robotics Club organized RoboFusion 1.0, a national robotics festival featuring robotics competitions, project showcasing, Techathon and RC boat racing at Kaliakair Hi-Tech Park."
+
+                >
+
+                    Read More →
+
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="news-card">
+
+
+            <div class="news-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85"
+                    alt="Data science"
+                >
+
+            </div>
+
+
+            <div class="news-body">
+
+                <div class="news-date">
+                    13 JULY 2026
+                </div>
+
+                <h3>
+                    National Data Science Summit 2026 success
+                </h3>
+
+                <p>
+
+                    UFTB highlighted championship and runner-up achievements in project showcasing at the National Data Science Summit 2026.
+
+                </p>
+
+
+                <button
+                    class="read-more news-modal-btn"
+                    data-title="National Data Science Summit 2026"
+                    data-date="13 July 2026"
+                    data-text="UFTB highlighted a historic success at the National Data Science Summit 2026, including championship and runner-up achievements in project showcasing."
+
+                >
+
+                    Read More →
+
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="news-card">
+
+
+            <div class="news-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=85"
+                    alt="Students"
+                >
+
+            </div>
+
+
+            <div class="news-body">
+
+                <div class="news-date">
+                    2026
+                </div>
+
+                <h3>
+                    AI and Educational Technology
+                </h3>
+
+                <p>
+
+                    UFTB researchers continue publishing work
+                    involving explainable AI, personalized learning
+                    and technology-enhanced education.
+
+                </p>
+
+
+                <button
+                    class="read-more news-modal-btn"
+                    data-title="AI & Educational Technology"
+                    data-date="2026"
+                    data-text="Recent UFTB research includes explainable AI for undergraduate performance prediction, personalized learning and AI-for-Education projects."
+
+                >
+
+                    Read More →
+
+                </button>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     STUDENT CLUBS
+========================================================= -->
+
+<section
+    class="section clubs"
+    id="clubs"
+>
+
+<div class="container">
+
+
+    <div class="section-head">
+
+        <div class="eyebrow">
+            STUDENT LIFE
+        </div>
+
+        <h2>
+            Beyond the classroom.
+        </h2>
+
+        <p>
+
+            UFTB's Student Welfare Office currently lists ten
+            student clubs supporting sports, technology,
+            communication, creativity and leadership.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="club-grid reveal">
+
+
+        <div class="club">
+            <i class="fa-solid fa-futbol"></i>
+            <h3>UFTB Sports Club</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-code"></i>
+            <h3>Programming Club</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-microphone"></i>
+            <h3>Debating Club</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-music"></i>
+            <h3>Cultural Club</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-lightbulb"></i>
+            <h3>STEAM Club</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-robot"></i>
+            <h3>Robotics Club</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-language"></i>
+            <h3>Language Club</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-square-root-variable"></i>
+            <h3>Math Squad</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Cyber Security Club</h3>
+        </div>
+
+
+        <div class="club">
+            <i class="fa-solid fa-brain"></i>
+            <h3>AI Community</h3>
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     DIGITAL SERVICES
+========================================================= -->
+
+<section
+    class="section digital"
+    id="digital"
+>
+
+<div class="container">
+
+
+    <div class="section-head">
+
+        <div class="eyebrow">
+            DIGITAL CAMPUS
+        </div>
+
+        <h2>
+            A university built for the digital age.
+        </h2>
+
+        <p>
+
+            UFTB provides technology-supported academic
+            management through digital learning and university
+            management systems.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="digital-grid reveal">
+
+
+        <div class="digital-card">
+
+            <i class="fa-solid fa-laptop"></i>
+
+            <h3>
+                LMS
+            </h3>
+
+            <p>
+                Learning materials, classes, assignments,
+                examinations and results.
+            </p>
+
+            <a href="#">
+                Access LMS →
+            </a>
+
+        </div>
+
+
+        <div class="digital-card">
+
+            <i class="fa-solid fa-server"></i>
+
+            <h3>
+                UMS
+            </h3>
+
+            <p>
+                Academic management, attendance, assessment
+                and examination services.
+            </p>
+
+            <a href="#">
+                Access UMS →
+            </a>
+
+        </div>
+
+
+        <div class="digital-card">
+
+            <i class="fa-solid fa-book-open"></i>
+
+            <h3>
+                E-Library
+            </h3>
+
+            <p>
+                Digital academic resources and online learning
+                materials.
+            </p>
+
+            <a href="#">
+                Open E-Library →
+            </a>
+
+        </div>
+
+
+        <div class="digital-card">
+
+            <i class="fa-solid fa-globe"></i>
+
+            <h3>
+                IODL
+            </h3>
+
+            <p>
+                Institute for Online and Distance Learning,
+                supporting flexible technology-based education.
+            </p>
+
+            <a
+                href="https://uftb.ac.bd/academics/institutes"
+                target="_blank"
+            >
+                Learn More →
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ADMISSION
+========================================================= -->
+
+<section
+    class="section admission"
+    id="admission"
+>
+
+<div class="container">
+
+
+    <div class="admission-box">
+
+
+        <div class="admission-content">
+
+            <div class="eyebrow">
+                ADMISSIONS
+            </div>
+
+            <h2>
+                Start your journey at UFTB.
+            </h2>
+
+            <p>
+
+                Explore UFTB's technology-focused academic
+                departments and follow official admission notices
+                for current application information.
+
+            </p>
+
+        </div>
+
+
+        <a
+            href="https://uftb.ac.bd/"
+            target="_blank"
+            class="btn btn-gold"
+        >
+
+            Official Admission Information
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section
+    class="section contact"
+    id="contact"
+>
+
+<div class="container">
+
+
+    <div class="section-head">
+
+        <div class="eyebrow">
+            CONTACT UFTB
+        </div>
+
+        <h2>
+            Find and connect with us.
+        </h2>
+
+    </div>
+
+
+
+    <div class="contact-grid reveal">
+
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+            </div>
+
+            <h3>
+                Campus
+            </h3>
+
+            <p>
+                Kaliakair, Gazipur-1750,
+                Bangladesh
+            </p>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+
+                <i class="fa-solid fa-phone"></i>
+
+            </div>
+
+            <h3>
+                Telephone
+            </h3>
+
+            <p>
+                09666775534
+            </p>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+
+                <i class="fa-solid fa-envelope"></i>
+
+            </div>
+
+            <h3>
+                Email
+            </h3>
+
+            <p>
+                info@uftb.ac.bd
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+
+<div class="container footer-main">
+
+
+    <div>
+
+
+        <div class="footer-brand">
+
+            <img
+                src="https://uftb.ac.bd/uploads/settings/17663114199270.png"
+                alt="UFTB Logo"
+            >
+
+            <h3>
+                University of Frontier
+                Technology, Bangladesh
+            </h3>
+
+        </div>
+
+
+        <p class="footer-description">
+
+            A specialized public university committed to
+            technology-focused education, research, innovation,
+            entrepreneurship and national development.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="footer-column">
+
+        <h4>
+            ACADEMICS
+        </h4>
+
+        <a href="#academics">
+            Faculties
+        </a>
+
+        <a href="#academics">
+            Departments
+        </a>
+
+        <a href="#labs">
+            Laboratories
+        </a>
+
+        <a href="#digital">
+            Digital Campus
+        </a>
+
+    </div>
+
+
+
+    <div class="footer-column">
+
+        <h4>
+            UNIVERSITY
+        </h4>
+
+        <a href="#about">
+            About UFTB
+        </a>
+
+        <a href="#research">
+            Research
+        </a>
+
+        <a href="#clubs">
+            Student Life
+        </a>
+
+        <a href="#news">
+            News & Events
+        </a>
+
+    </div>
+
+
+
+    <div class="footer-column">
+
+        <h4>
+            OFFICIAL LINKS
+        </h4>
+
+        <a
+            href="https://uftb.ac.bd/"
+            target="_blank"
+        >
+            Official Website
+        </a>
+
+        <a
+            href="https://www.facebook.com/uftb.ac.bd.official/about/"
+            target="_blank"
+        >
+            Facebook
+        </a>
+
+        <a href="mailto:info@uftb.ac.bd">
+            Email UFTB
+        </a>
+
+        <a href="tel:09666775534">
+            Call UFTB
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="container footer-bottom">
+
+    <div>
+        © 2026 University of Frontier Technology, Bangladesh.
+    </div>
+
+    <div>
+        Kaliakair, Gazipur-1750, Bangladesh
+    </div>
+
+</div>
+
+
+</footer>
+
+
+
+<!-- =========================================================
+     SEARCH OVERLAY
+========================================================= -->
+
+<div
+    class="search-overlay"
+    id="searchOverlay"
+>
+
+<div class="search-box">
+
+    <input
+        class="search-input"
+        id="searchInput"
+        type="text"
+        placeholder="Search UFTB..."
+    >
+
+    <div
+        class="search-results"
+        id="searchResults"
+    ></div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     NEWS MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="newsModal"
+>
+
+<div class="modal-content">
+
+    <button
+        class="modal-close"
+        id="modalClose"
+    >
+        ×
+    </button>
+
+
+    <div class="eyebrow"
+         id="modalDate">
+    </div>
+
+
+    <h2
+        id="modalTitle"
+        style="
+            font-family:'Noto Serif',serif;
+            color:var(--green);
+            margin-bottom:15px;
+        "
+    >
+    </h2>
+
+
+    <p
+        id="modalText"
+        style="
+            color:var(--muted);
+            font-size:13px;
+        "
+    >
     </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     LIGHTBOX
+========================================================= -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+>
+
+<button
+    class="lightbox-close"
+    id="lightboxClose"
+>
+    ×
+</button>
+
+
+<img
+    id="lightboxImage"
+    src=""
+    alt="UFTB Gallery"
+>
+
+</div>
+
+
+
+<!-- =========================================================
+     FLOATING TOOLS
+========================================================= -->
+
+<div class="floating-tools">
+
+
+<button
+    class="float-btn"
+    id="topBtn"
+    title="Back to top"
+>
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+<a
+    href="mailto:info@uftb.ac.bd"
+    class="float-btn"
+    title="Email"
+>
+
+    <i class="fa-solid fa-envelope"></i>
+
+</a>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   PRELOADER
+========================================================= */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        document
+            .getElementById("preloader")
+            .classList.add("hide");
+
+    }, 700);
+
+});
+
+
+
+/* =========================================================
+   HEADER SCROLL
+========================================================= */
+
+const header =
+    document.getElementById("header");
+
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 30) {
+
+        header.classList.add("scrolled");
+
+    } else {
+
+        header.classList.remove("scrolled");
+
+    }
+
+});
+
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
+const mobileToggle =
+    document.getElementById("mobileToggle");
+
+const mainNav =
+    document.getElementById("mainNav");
+
+
+mobileToggle.addEventListener(
+    "click",
+    () => {
+
+        mainNav.classList.toggle("active");
+
+        const icon =
+            mobileToggle.querySelector("i");
+
+
+        if (
+            mainNav.classList.contains("active")
+        ) {
+
+            icon.className =
+                "fa-solid fa-xmark";
+
+        } else {
+
+            icon.className =
+                "fa-solid fa-bars";
+
+        }
+
+    }
+);
+
+
+
+/* close nav after click */
+
+document
+    .querySelectorAll(".nav-link")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    window.innerWidth <= 850
+                ) {
+
+                    mainNav.classList.remove(
+                        "active"
+                    );
+
+                    mobileToggle
+                        .querySelector("i")
+                        .className =
+                        "fa-solid fa-bars";
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+/* =========================================================
+   HERO SLIDER
+========================================================= */
+
+const heroSlides =
+    document.querySelectorAll(".hero-slide");
+
+const heroDots =
+    document.querySelectorAll(".hero-dot");
+
+let currentSlide = 0;
+
+
+function showSlide(index) {
+
+    heroSlides.forEach(
+        slide =>
+            slide.classList.remove("active")
+    );
+
+
+    heroDots.forEach(
+        dot =>
+            dot.classList.remove("active")
+    );
+
+
+    heroSlides[index]
+        .classList.add("active");
+
+
+    heroDots[index]
+        .classList.add("active");
+
+
+    currentSlide = index;
+
+}
+
+
+heroDots.forEach(
+    (dot, index) => {
+
+        dot.addEventListener(
+            "click",
+            () => showSlide(index)
+        );
+
+    }
+);
+
+
+setInterval(() => {
+
+    currentSlide =
+        (currentSlide + 1)
+        % heroSlides.length;
+
+    showSlide(currentSlide);
+
+}, 6000);
+
+
+
+/* =========================================================
+   FACULTY TABS
+========================================================= */
+
+const facultyTabs =
+    document.querySelectorAll(
+        ".faculty-tab"
+    );
+
+const facultyPanels =
+    document.querySelectorAll(
+        ".faculty-panel"
+    );
+
+
+facultyTabs.forEach(tab => {
+
+    tab.addEventListener(
+        "click",
+        () => {
+
+            const target =
+                tab.dataset.faculty;
+
+
+            facultyTabs.forEach(
+                t =>
+                    t.classList.remove(
+                        "active"
+                    )
+            );
+
+
+            facultyPanels.forEach(
+                panel =>
+                    panel.classList.remove(
+                        "active"
+                    )
+            );
+
+
+            tab.classList.add("active");
+
+
+            document
+                .querySelector(
+                    `[data-panel="${target}"]`
+                )
+                .classList.add("active");
+
+        }
+    );
+
+});
+
+
+
+/* =========================================================
+   RESEARCH TABS
+========================================================= */
+
+const researchTabs =
+    document.querySelectorAll(
+        ".research-tab"
+    );
+
+const researchPanels =
+    document.querySelectorAll(
+        ".research-panel"
+    );
+
+
+researchTabs.forEach(tab => {
+
+    tab.addEventListener(
+        "click",
+        () => {
+
+            const target =
+                tab.dataset.research;
+
+
+            researchTabs.forEach(
+                t =>
+                    t.classList.remove(
+                        "active"
+                    )
+            );
+
+
+            researchPanels.forEach(
+                panel =>
+                    panel.classList.remove(
+                        "active"
+                    )
+            );
+
+
+            tab.classList.add("active");
+
+
+            document
+                .querySelector(
+                    `[data-research-panel="${target}"]`
+                )
+                .classList.add("active");
+
+        }
+    );
+
+});
+
+
+
+/* =========================================================
+   COUNTER
+========================================================= */
+
+const counters =
+    document.querySelectorAll(
+        ".counter"
+    );
+
+
+let counterStarted = false;
+
+
+function runCounters() {
+
+    if (counterStarted)
+        return;
+
+    counterStarted = true;
+
+
+    counters.forEach(counter => {
+
+        const target =
+            Number(
+                counter.dataset.target
+            );
+
+
+        let value = 0;
+
+        const increment =
+            Math.max(
+                1,
+                Math.ceil(target / 50)
+            );
+
+
+        const interval =
+            setInterval(() => {
+
+                value += increment;
+
+
+                if (value >= target) {
+
+                    value = target;
+
+                    clearInterval(interval);
+
+                }
+
+
+                counter.textContent =
+                    value.toLocaleString();
+
+            }, 30);
+
+    });
+
+}
+
+
+const statsSection =
+    document.querySelector(
+        ".stats-section"
+    );
+
+
+const statsObserver =
+    new IntersectionObserver(
+        entries => {
+
+            if (
+                entries[0].isIntersecting
+            ) {
+
+                runCounters();
+
+            }
+
+        },
+        {
+            threshold: .3
+        }
+    );
+
+
+statsObserver.observe(statsSection);
+
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: .12
+        }
+    );
+
+
+revealElements.forEach(
+    element =>
+        revealObserver.observe(element)
+);
+
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchBtn =
+    document.getElementById(
+        "searchBtn"
+    );
+
+const searchOverlay =
+    document.getElementById(
+        "searchOverlay"
+    );
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+const searchResults =
+    document.getElementById(
+        "searchResults"
+    );
+
+
+const searchData = [
+
+    [
+        "Internet of Things and Robotics Engineering",
+        "#academics"
+    ],
+
+    [
+        "Data Science and Engineering",
+        "#academics"
+    ],
+
+    [
+        "Software Engineering",
+        "#academics"
+    ],
+
+    [
+        "Cyber Security Engineering",
+        "#academics"
+    ],
+
+    [
+        "Educational Technology and Engineering",
+        "#academics"
+    ],
+
+    [
+        "Research",
+        "#research"
+    ],
+
+    [
+        "Laboratories",
+        "#labs"
+    ],
+
+    [
+        "Student Clubs",
+        "#clubs"
+    ],
+
+    [
+        "Admissions",
+        "#admission"
+    ],
+
+    [
+        "Contact",
+        "#contact"
+    ],
+
+    [
+        "Vice Chancellor",
+        "#leadership"
+    ],
+
+    [
+        "Digital Services",
+        "#digital"
+    ]
+
+];
+
+
+searchBtn.addEventListener(
+    "click",
+    () => {
+
+        searchOverlay
+            .classList
+            .add("active");
+
+        searchInput.focus();
+
+    }
+);
+
+
+searchOverlay.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            searchOverlay
+        ) {
+
+            searchOverlay
+                .classList
+                .remove("active");
+
+        }
+
+    }
+);
+
+
+searchInput.addEventListener(
+    "input",
+    () => {
+
+        const query =
+            searchInput
+                .value
+                .toLowerCase()
+                .trim();
+
+
+        if (!query) {
+
+            searchResults.innerHTML =
+                "";
+
+            return;
+
+        }
+
+
+        const matches =
+            searchData.filter(
+                item =>
+                    item[0]
+                        .toLowerCase()
+                        .includes(query)
+            );
+
+
+        searchResults.innerHTML =
+            matches.length
+
+            ?
+
+            matches
+                .map(
+                    item =>
+                        `
+                        <a
+                            class="search-result"
+                            href="${item[1]}"
+                        >
+                            ${item[0]}
+                        </a>
+                        `
+                )
+                .join("")
+
+            :
+
+            `
+                <div class="search-result">
+                    No results found.
+                </div>
+            `;
+
+    }
+);
+
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+const themeBtn =
+    document.getElementById(
+        "themeBtn"
+    );
+
+
+themeBtn.addEventListener(
+    "click",
+    () => {
+
+        document.body
+            .classList
+            .toggle("dark");
+
+
+        const icon =
+            themeBtn.querySelector("i");
+
+
+        if (
+            document.body
+                .classList
+                .contains("dark")
+        ) {
+
+            icon.className =
+                "fa-solid fa-sun";
+
+        } else {
+
+            icon.className =
+                "fa-solid fa-moon";
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   NEWS MODAL
+========================================================= */
+
+const newsModal =
+    document.getElementById(
+        "newsModal"
+    );
+
+const modalTitle =
+    document.getElementById(
+        "modalTitle"
+    );
+
+const modalDate =
+    document.getElementById(
+        "modalDate"
+    );
+
+const modalText =
+    document.getElementById(
+        "modalText"
+    );
+
+const modalClose =
+    document.getElementById(
+        "modalClose"
+    );
+
+
+document
+    .querySelectorAll(
+        ".news-modal-btn"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                modalTitle.textContent =
+                    button.dataset.title;
+
+                modalDate.textContent =
+                    button.dataset.date;
+
+                modalText.textContent =
+                    button.dataset.text;
+
+
+                newsModal
+                    .classList
+                    .add("active");
+
+            }
+        );
+
+    });
+
+
+modalClose.addEventListener(
+    "click",
+    () => {
+
+        newsModal
+            .classList
+            .remove("active");
+
+    }
+);
+
+
+newsModal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            newsModal
+        ) {
+
+            newsModal
+                .classList
+                .remove("active");
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+const lightbox =
+    document.getElementById(
+        "lightbox"
+    );
+
+const lightboxImage =
+    document.getElementById(
+        "lightboxImage"
+    );
+
+const lightboxClose =
+    document.getElementById(
+        "lightboxClose"
+    );
+
+
+document
+    .querySelectorAll(
+        ".lightbox-trigger"
+    )
+    .forEach(card => {
+
+        card.addEventListener(
+            "click",
+            () => {
+
+                lightboxImage.src =
+                    card.dataset.image;
+
+
+                lightbox
+                    .classList
+                    .add("active");
+
+            }
+        );
+
+    });
+
+
+lightboxClose.addEventListener(
+    "click",
+    () => {
+
+        lightbox
+            .classList
+            .remove("active");
+
+    }
+);
+
+
+lightbox.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            lightbox
+        ) {
+
+            lightbox
+                .classList
+                .remove("active");
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+const topBtn =
+    document.getElementById(
+        "topBtn"
+    );
+
+
+topBtn.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+
+/* =========================================================
+   KEYBOARD ESCAPE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            searchOverlay
+                .classList
+                .remove("active");
+
+            newsModal
+                .classList
+                .remove("active");
+
+            lightbox
+                .classList
+                .remove("active");
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   ACTIVE NAV ON SCROLL
+========================================================= */
+
+const sections =
+    document.querySelectorAll(
+        "section[id]"
+    );
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        let current = "";
+
+
+        sections.forEach(section => {
+
+            const top =
+                section.offsetTop - 130;
+
+
+            if (
+                window.scrollY >= top
+            ) {
+
+                current =
+                    section.id;
+
+            }
+
+        });
+
+
+        document
+            .querySelectorAll(
+                ".nav-link"
+            )
+            .forEach(link => {
+
+                link.classList.remove(
+                    "active"
+                );
+
+
+                if (
+                    link.getAttribute(
+                        "href"
+                    ) === `#${current}`
+                ) {
+
+                    link.classList.add(
+                        "active"
+                    );
+
+                }
+
+            });
+
+    }
+);
+
+
+/* =========================================================
+   PREVENT BROKEN #
+========================================================= */
+
+document
+    .querySelectorAll(
+        'a[href="#"]'
+    )
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event =>
+                event.preventDefault()
+        );
+
+    });
+
+
+</script>
+
+</body>
 </html>
